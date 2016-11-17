@@ -1,0 +1,77 @@
+import com.badlogic.gdx.ApplicationListener;  
+import com.badlogic.gdx.Gdx;  
+import com.badlogic.gdx.graphics.Color;  
+import com.badlogic.gdx.graphics.GL10;  
+import com.badlogic.gdx.graphics.g2d.BitmapFont;  
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;  
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;  
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeBitmapFontData;  
+  
+public class FirstGame implements ApplicationListener {  
+  
+    private FreeTypeFontGenerator generator;//TTF font generator  
+    private FreeTypeBitmapFontData fontData;//deal with the data of the FreeTypeFontGenerator.You can think it as a complete font library  
+    private BitmapFont font;//the purpose  
+    private SpriteBatch batch;  
+      
+      
+    @Override  
+    public void create() {  
+        /**  
+         * initialize  
+         */  
+        generator = new FreeTypeFontGenerator(Gdx.files.internal("hjd.ttf"));  
+        fontData = generator.generateData(35,generator.DEFAULT_CHARS + "中国智造惠及全球",false);  
+        font = new BitmapFont(fontData, fontData.getTextureRegion(), false);  
+        batch = new SpriteBatch();  
+          
+        font.setColor(Color.GREEN);  
+    }  
+  
+    @Override  
+    public void dispose() {  
+        // TODO Auto-generated method stub  
+  
+    }  
+  
+    @Override  
+    public void pause() {  
+        // TODO Auto-generated method stub  
+  
+    }  
+  
+    @Override  
+    public void render() {  
+        Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);//clear the screen 
+          
+        batch.begin();  
+          
+        /**  
+         * font.drawMultiLine()display multiple lines 
+         *   
+         */  
+        font.drawMultiLine(batch, "hello libgdx \n my name is huangjundong .\n 中国智造   惠及全球", 0, Gdx.graphics.getHeight()/2);  
+          
+          
+        /**  
+         * font.draw()display the single line  
+         *   
+         *   
+         */  
+        font.draw(batch, "helloworld , \n i love zhangzetian", 0, 100);  
+          
+        batch.end();  
+    }  
+  
+    @Override  
+    public void resize(int arg0, int arg1) {  
+          
+    }  
+  
+    @Override  
+    public void resume() {  
+        // TODO Auto-generated method stub  
+  
+    }  
+  
+}  
